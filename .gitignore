@@ -1,0 +1,19 @@
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases (We don't want to commit the actual SQLite binary with production data)
+*.db
+*.sqlite3
+
+# Project/IDE specific
+.vscode/
+.idea/
+.DS_Store

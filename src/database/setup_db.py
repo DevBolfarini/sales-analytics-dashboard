@@ -1,34 +1,44 @@
 import sqlite3
+import logging
+from pathlib import Path
 
-def criar_banco():
-    # 1. Definimos o caminho onde o arquivo do banco será salvo. 
-    # Como vamos rodar o código da raiz do projeto, o caminho é relativo à raiz.
-    caminho_banco = "data/vendas.db"
+# Configuração básica de logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+
+def criar_banco() -> None:
+    """
+    Cria o banco de dados SQLite e a tabela 'vendas_brutas' se não existirem.
     
-    # 2. Conectando ao banco (se o arquivo não existir, o SQLite cria para a gente!)
-    conn = sqlite3.connect(caminho_banco)
-    cursor = conn.cursor()
+    A função utiliza pathlib para garantir portabilidade entre sistemas operacionais
+    e um bloco try-except para captura e registro de falhas.
+    """
+    # Usando pathlib para tratar caminhos de forma segura em qualquer OS
+    caminho_banco = Path("data/vendas.db")
+    caminho_banco.parent.mkdir(parents=True, exist_ok=True)
     
-    # 3. A query SQL para criar a tabela. 
-    # DICA INTRODUTÓRIA: O id precisa ser INTEGER PRIMARY KEY AUTOINCREMENT
     query = """
     CREATE TABLE IF NOT EXISTS vendas_brutas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        data_venda TEXT,
-        produto TEXT,
-        quantidade INTEGER,
-        preco_unitario REAL,
-        vendedor TEXT
+        data_venda TEXT NOT NULL,
+        produto TEXT NOT NULL,
+        quantidade INTEGER NOT NULL,
+        preco_unitario REAL NOT NULL,
+        vendedor TEXT NOT NULL
     )
     """
     
-    # 4. Executa a query
-    cursor.execute(query)
-    
-    # 5. Salva e fecha
-    conn.commit()
-    conn.close()
-    print("Banco de dados e tabela criados com sucesso na pasta 'data'!")
+    try:
+        # Usando context manager (with) para garantir o fechamento da conexão
+        with sqlite3.connect(caminho_banco) as conn:
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+            logging.info(f"Banco de dados e tabela garantidos em '{caminho_banco}'.")
+            
+    except sqlite3.Error as e:
+        logging.error(f"Erro ao inicializar o banco de dados: {e}")
+
 
 if __name__ == "__main__":
     criar_banco()
