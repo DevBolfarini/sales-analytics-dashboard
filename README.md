@@ -1,7 +1,7 @@
 <div align="center">
-  <h1>📊 Sales Analytics & Management System</h1>
+  <h1>📊 Sistema de Gerenciamento e Análise de Vendas</h1>
   <p>
-    <strong>A complete Full-Stack solution combining CRUD operations and an ETL pipeline using modern Python tools.</strong>
+    <strong>Uma solução Full-Stack completa combinando operações CRUD e um pipeline ETL usando ferramentas modernas em Python.</strong>
   </p>
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
@@ -11,36 +11,36 @@
 
 <br>
 
-## 📖 Overview
+## 📖 Visão Geral
 
-This project was built from the ground up as a robust exercise in **Data Engineering** and **Software Engineering**. It abstracts the complexity of raw sales data into a beautiful, interactive web interface, while maintaining a rigorous, production-ready backend flow.
+Este projeto foi construído do zero como um exercício robusto de **Engenharia de Dados** e **Engenharia de Software**. Ele abstrai a complexidade dos dados brutos de vendas em uma interface web bonita e interativa, mantendo um fluxo de backend rigoroso e pronto para produção.
 
-### ✨ Key Features
-* **ETL Pipeline (Drag & Drop):** You do not need to deal with the terminal. Drag a raw CSV into the *Carga de Dados* tab and the Pandas engine will Extract, Transform (`fillna`, column normalization) and Bulk Load (`to_sql`) thousands of lines instantly.
-* **Full CRUD Operations:** Create, Read, Update, and Delete individual sales records directly through the intuitive Streamlit UI via a local SQLite memory-mapped database.
-* **Managerial Dashboard:** A dynamic analytics tab that aggregates sales in real-time, calculating Gross Revenue and ranking Sales Representatives through interactive Bar Charts.
-* **Production-Ready Code:** The backend uses Type Hinting, Context Managers for database lifecycle (`with sqlite3`), PEP 8 formatting, and `try-except` blocks with standard Python `logging`.
-
----
-
-## 🛠️ Architecture
-
-* **Frontend:** `app.py` (Streamlit MVC modularized application)
-* **Backend (Data Access):** `crud.py` (SQLite operations, Parameterized queries for SQL Injection prevention)
-* **Backend (Data Engineering):** `carga.py` & `setup_db.py` (Pandas Analytics Engine & DB schemas)
-* **Database:** SQLite (`vendas.db`)
+### ✨ Principais Funcionalidades
+* **Pipeline ETL (Drag & Drop):** Você não precisa lidar com o terminal. Arraste um arquivo CSV bruto para a guia *Carga de Dados* e o mecanismo do Pandas irá Extrair, Transformar (normalização de colunas) e Carregar em massa (`to_sql`) milhares de linhas instantaneamente.
+* **Operações CRUD Completas:** Crie, Leia, Atualize e Exclua registros de vendas individuais diretamente pela interface intuitiva do Streamlit por meio de um banco de dados SQLite local na memória.
+* **Painel Gerencial (Dashboard):** Uma aba de análise dinâmica que agrega vendas em tempo real, calculando a Receita Bruta e ranqueando os Representantes de Vendas por meio de gráficos de barras interativos.
+* **Código Pronto para Produção:** O backend usa tipagem forte (Type Hinting), Gerenciadores de Contexto (Context Managers) para o ciclo de vida do banco de dados (`with sqlite3`), formatação PEP 8 e blocos `try-except` com logs (Python `logging`).
 
 ---
 
-## 🚀 How to Run Locally
+## 🛠️ Arquitetura
 
-### 1. Clone the repository
+* **Frontend:** `app.py` (Aplicação Streamlit MVC modularizada)
+* **Backend (Acesso a Dados):** `crud.py` (Operações SQLite, Consultas parametrizadas para prevenção contra SQL Injection)
+* **Backend (Engenharia de Dados):** `carga.py` & `setup_db.py` (Carga via Pandas Pandas E schemas de DB)
+* **Banco de Dados:** SQLite (`vendas.db`)
+
+---
+
+## 🚀 Como Rodar Localmente
+
+### 1. Clonar o repositório
 ```bash
-git clone https://github.com/your-username/crud-etl-sales.git
-cd crud-etl-sales
+git clone https://github.com/SeuUsuario/sales-analytics-dashboard.git
+cd sales-analytics-dashboard
 ```
 
-### 2. Create and Activate a Virtual Environment
+### 2. Criar e Ativar um Ambiente Virtual
 **Windows:**
 ```bash
 python -m venv .venv
@@ -53,27 +53,27 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install the specific dependencies
+### 3. Instalar as dependências específicas
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Initialize the Database
-Before running the app, we need to create the table schemas inside the `data/` folder.
+### 4. Inicializar o Banco de Dados
+Antes de rodar o aplicativo, precisamos criar os schemas da tabela dentro da pasta `data/`.
 ```bash
 python src/database/setup_db.py
 ```
 
-### 5. Launch the Application!
+### 5. Iniciar a Aplicação!
 ```bash
 streamlit run src/app.py
 ```
 
 ---
 
-## 📉 Sample Data
+## 📉 Dados de Exemplo (Sample)
 
-If you want to test the ETL pipeline, a sample dirty dataset is included in `data/vendas_historico.csv`. Drag and drop it into the "📥 Carga de Dados" tab inside the Streamlit App to see the `Pandas` engine clean and load the data.
+Se você quiser testar o pipeline ETL, um dataset sujo de exemplo está incluído em `data/vendas_historico.csv`. Arraste e solte-o na aba "📥 Carga de Dados" no Streamlit App para ver o motor do `Pandas` limpando e carregando os dados.
 
 ---
-*Developed during an intensive Data Engineering Mentorship.*
+*Desenvolvido durante uma Mentoria Intensiva de Engenharia de Dados.*
