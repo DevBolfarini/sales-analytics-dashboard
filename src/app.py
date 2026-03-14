@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 from typing import List, Tuple, Any
 from database.crud import (
     listar_vendas,
@@ -55,10 +56,19 @@ def render_dashboard(dados: List[Tuple[Any, ...]]) -> None:
     )
     
     st.divider()
-    faturamento_por_vendedor = df_dash.groupby('Vendedor')['Faturamento'].sum().sort_values(ascending=False)
+    faturamento_por_vendedor = df_dash.groupby('Vendedor')['Faturamento'].sum().sort_values(ascending=False).reset_index()
     
     st.subheader("Faturamento por Vendedor")
-    st.bar_chart(faturamento_por_vendedor)
+    fig = px.bar(
+        faturamento_por_vendedor,
+        x='Vendedor',
+        y='Faturamento',
+        text_auto='.2s',
+        color='Faturamento',
+        color_continuous_scale='Blues'
+    )
+    fig.update_layout(xaxis={'categoryorder':'total descending'}, showlegend=False)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def render_carga() -> None:
